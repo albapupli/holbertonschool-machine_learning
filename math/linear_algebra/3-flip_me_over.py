@@ -6,5 +6,5 @@ def matrix_transpose(matrix):
     """transpose the matrix"""
     row = len(matrix)
     col = len(matrix[0])
-    result = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+    result = [[matrix[j][i] for j in range(row)] for i in range(col)]
     return result
