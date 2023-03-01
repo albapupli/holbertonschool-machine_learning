@@ -2,7 +2,6 @@
 """function to find shape of matrix"""
 
 
-import numpy as np
 def np_shape(matrix):
     """find the shapw"""
     return matrix.shape
