@@ -4,7 +4,4 @@
 
 def cat_arrays(arr1, arr2):
     """concat 2 arrays"""
-    result = []
-    for i in range(len(arr2)):
-        result.append(arr2[i])
-    return result
+    return arr1.copy() + arr2.copy()
