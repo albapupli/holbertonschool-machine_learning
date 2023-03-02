@@ -5,6 +5,6 @@
 import numpy as np
 
 
-def np_cat(mat1, mat2, axis=0):
+def np_matmul(mat1, mat2):
     """concat two matrices"""
-    return (np.matmul(mat1, mat2)) # mat1.matmul(mat2)
+    return (np.matmul(mat1, mat2))
