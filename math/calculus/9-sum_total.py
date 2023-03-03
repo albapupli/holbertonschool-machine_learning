@@ -4,7 +4,6 @@
 
 def summation_i_squared(n):
     """sum of n consecutive nr"""
-    if (n==0):
-        return 0;
+    if (n == 0):
+        return 0
     return n*n + summation_i_squared(n-1)
-        
