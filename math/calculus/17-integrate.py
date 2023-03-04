@@ -4,6 +4,8 @@
 
 def poly_integral(poly, C=0):
     """calculate integral of poly"""
+    if(poly == 0):
+        return 0
     integral = []
     integral.append(0)
     for i in range(0, len(poly)):
