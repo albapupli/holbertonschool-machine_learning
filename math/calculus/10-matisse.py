@@ -10,5 +10,5 @@ def poly_derivative(poly):
         return [0]
     der = []
     for i in range(1, len(poly)):
-          der.append(poly[i] * i)
+        der.append(poly[i] * i)
     return der
