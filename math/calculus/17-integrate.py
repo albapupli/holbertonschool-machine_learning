@@ -3,19 +3,16 @@
 
 
 def poly_integral(poly, C=0):
-    if type(poly) is not list or len(poly) == 0:
+    """calculates the integral of a polynomial"""
+    if not isinstance(C, int) or not isinstance(poly, list) or len(poly) == 0:
         return None
-    elif type(C) is int:
-        if poly == [0]:
-            return C
-        exponent = 0
-        integral = poly.copy()
-        for i in range(len(integral)):
-            if type(integral[i]) is int or type(integral[i]) is float:
-                exponent +=1
-                number = integral[i] / exponent
-                integral[i] = int(number) if number % 1 == 0 else number
-            else:
-                return None
-        integral.insert(0, C)
-        return integral
+    integral = [C]
+    for power, coefficient in enumerate(poly):
+        if (coefficient % (power + 1)) == 0:
+            new_coefficient = coefficient // (power + 1)
+        else:
+            new_coefficient = coefficient / (power + 1)
+        integral.append(new_coefficient)
+    while integral[-1] == 0 and len(integral) > 1:
+        integral = integral[:-1]
+    return integral
