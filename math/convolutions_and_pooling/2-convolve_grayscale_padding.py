@@ -16,7 +16,6 @@ def convolve_grayscale_padding(images, kernel, padding):
     images = np.pad(images, ((0, 0), (ph, ph), (pw, pw)), 'constant', constant_values=0)
 
     # (2 * ph) because left-right / top-bottom
-    # kh - 1 mount of kernel that hangs over the top and bottom, start counting from 0
     ch = height + (2 * ph) - kh + 1
     cw = width + (2 * pw) - kw + 1
 
