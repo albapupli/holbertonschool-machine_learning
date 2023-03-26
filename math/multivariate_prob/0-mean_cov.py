@@ -7,11 +7,11 @@ import numpy as np
 def mean_cov(X):
     """check here all the edge cases as denotes in the requirements"""
 
-    if X is not np.ndarray:
-        raise TypeError("C must be a numpy.ndarray")
+    if X is not np.ndarray or len(x.shape) != 2:
+        raise TypeError("X must be a 2D numpy.ndarray")
 
-    if len(X.shape) != 2 or X.shape[0] != X.shape[1] :
-        raise ValueError("C must be a 2D square matrix")
+    if X.shape[0] < 2:
+        raise ValueError("X must contain multiple data points")
     
     mean = np.mean(X, axis=0)
     cov = np.zeros((d, d))
