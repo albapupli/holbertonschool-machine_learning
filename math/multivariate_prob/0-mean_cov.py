@@ -4,6 +4,7 @@
 
 import numpy as np
 
+
 def mean_cov(X):
     """check here all the edge cases as denotes in the requirements"""
 
