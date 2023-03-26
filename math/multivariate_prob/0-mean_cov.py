@@ -13,7 +13,7 @@ def mean_cov(X):
 
     if X.shape[0] < 2:
         raise ValueError("X must contain multiple data points")
-    
+
     mean = np.mean(X, axis=0)
     cov = np.zeros((d, d))
     for i in range(n):
