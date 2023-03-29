@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""this function calculates the intersection of obtaining this data with various hypothetical probabilities"""
+"""this function calculates the intersection of obtaining this
+data with various hypothetical probabilities"""
 
 
 import numpy as np
