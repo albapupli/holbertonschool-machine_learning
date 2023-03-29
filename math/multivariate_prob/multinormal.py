@@ -8,7 +8,9 @@ import numpy as np
 class MultiNormal:
     """this is the class construction with one parameter"""
     def __init__(self, data):
-        """the construction method"""
+        """
+        the construction method
+        """
         if not isinstance(data, np.ndarray) or len(data.shape) != 2:
             raise TypeError("data must be a 2D numpy.ndarray")
         n, d = data.shape
