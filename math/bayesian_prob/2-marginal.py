@@ -34,7 +34,7 @@ def marginal(x, n, P, Pr):
     fact_coefficient = factorial(n) / (factorial(n - x) * factorial(x))
     likelihood = fact_coefficient * (P ** x) * ((1 - P) ** (n - x))
 
-    #intersection is the likelihood times priors
+    # intersection is the likelihood times priors
     intersection = likelihood * Pr
 
     # marginal probability is the sum over all probabilities of events
