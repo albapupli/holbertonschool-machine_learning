@@ -23,7 +23,7 @@ class MultiNormal:
         """
         return teh pdf
         """
-        if not isinstance(x, np.ndarray):
+        if type(x) is not np.ndarray:
             raise TypeError("x must be a numpy.ndarray")
         d = self.cov.shape[0]
         if x.shape[0] != 1 or x.shape[1] != d:
