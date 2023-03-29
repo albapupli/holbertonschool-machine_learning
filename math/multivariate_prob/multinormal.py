@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""this class is multinormal class"""
 
 
 class MultiNormal:
