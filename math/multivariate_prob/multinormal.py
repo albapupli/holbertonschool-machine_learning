@@ -2,7 +2,11 @@
 """this class is multinormal class"""
 
 
+import numpy as np
+
+
 class MultiNormal:
+    """this is the class construction with one parameter"""
     def __init__(self, data):
         """the construction method"""
         if not isinstance(data, np.ndarray) or len(data.shape) != 2:
