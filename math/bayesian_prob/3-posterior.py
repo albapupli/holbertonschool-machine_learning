@@ -27,7 +27,7 @@ def posterior(x, n, P, Pr):
         if Pr[value] > 1 or Pr[value] < 0:
             raise ValueError("All values in Pr must be in the range [0, 1]")
     if np.isclose([np.sum(Pr)], [1]) == [False]:
-            raise ValueError("Pr must sum to 1")
+        raise ValueError("Pr must sum to 1")
 
     # likelihood calculated as binomial distribution
     factorial = np.math.factorial
