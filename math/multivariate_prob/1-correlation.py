@@ -2,6 +2,9 @@
 """this function calculates a correlation matrix"""
 
 
+import numpy as np
+
+
 def correlation(C):
     """
     Calculates a correlation matrix
