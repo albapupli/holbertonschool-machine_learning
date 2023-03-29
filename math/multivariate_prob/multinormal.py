@@ -4,6 +4,7 @@
 
 class MultiNormal:
     def __init__(self, data):
+        """the construction method"""
         if not isinstance(data, np.ndarray) or len(data.shape) != 2:
             raise TypeError("data must be a 2D numpy.ndarray")
         n, d = data.shape
@@ -12,10 +13,9 @@ class MultiNormal:
         self.mean, self.cov = mean_cov(data.T)
         self.mean = self.mean.reshape(-1, 1)
 
-
     def pdf(self, x):
         """
-        return teh pdf 
+        return teh pdf
         """
         if type(x) is not np.ndarray:
             raise TypeError("x must be a numpy.ndarray")
