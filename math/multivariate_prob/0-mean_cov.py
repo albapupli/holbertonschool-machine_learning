@@ -8,7 +8,7 @@ import numpy as np
 def mean_cov(X):
     """check here all the edge cases as denotes in the requirements"""
 
-    if not isinstance(X, np.ndarray) or len(x.shape[0]) != 2:
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         raise TypeError("X must be a 2D numpy.ndarray")
     n, d = X.shape
     if n < 2:
