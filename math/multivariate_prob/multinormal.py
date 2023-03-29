@@ -16,9 +16,7 @@ class MultiNormal:
         n, d = data.shape
         if data.shape[1] < 2:
             raise ValueError("data must contain multiple data points")
-        self.mean = np.mean(data)
-        self.mean = mean_cov(self.mean.T)
-        self.cov = mean_cov(data.T)
+        self.mean, self.cov = mean_cov(data.T)
         self.mean = self.mean.reshape(-1, 1)
 
     def pdf(self, x):
