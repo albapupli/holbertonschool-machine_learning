@@ -11,7 +11,7 @@ class MultiNormal:
         """
         the construction method
         """
-        if type(data) is not np.ndarray or len(data.shape) != 2:
+        if not isinstance(data, np.ndarray) or len(data.shape) != 2:
             raise TypeError("data must be a 2D numpy.ndarray")
         n, d = data.shape
         if n < 2:
@@ -21,12 +21,12 @@ class MultiNormal:
 
     def pdf(self, x):
         """
-        return teh pdf
+        return the pdf
         """
         if type(x) is not np.ndarray:
             raise TypeError("x must be a numpy.ndarray")
         d = self.cov.shape[0]
-        if x.shape[0] != 1 or x.shape[1] != d:
+        if len(x.shape) != 2:
             raise ValueError("x must have the shape ({}, 1)".format(d))
 
         test_d, one = x.shape
