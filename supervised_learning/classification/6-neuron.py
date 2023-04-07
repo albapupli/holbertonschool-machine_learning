@@ -2,7 +2,6 @@
 """class defining single neuron in nerual network based on 5-neuron.py"""
 
 
-import matplotlib.pyplot as plt
 import numpy as np
 
 
