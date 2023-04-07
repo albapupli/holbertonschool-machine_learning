@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""create a class representing a neuron of the neural network"""
+
 
 import numpy as np
 
