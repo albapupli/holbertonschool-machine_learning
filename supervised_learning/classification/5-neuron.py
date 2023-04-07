@@ -25,6 +25,7 @@ class Neuron:
         @property
         def b(self):
             return (self.__b)
+
         @property
         def A(self):
             return (self.__A)
@@ -46,7 +47,8 @@ class Neuron:
             cost = (1 / m) * sum of loss function for all m example
             """
             m = Y.shape[1]
-            m_loss = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
+            m_loss = np.sum((Y * np.log(A)) +
+                            ((1 - Y) * np.log(1.0000001 - A)))
             cost = (1 / m) * (-(m_loss))
             return (cost)
 
