@@ -40,7 +40,8 @@ class Neuron:
 
         def cost(self, Y, A):
             """
-            calculates the cost of the model using logistic regression function:
+            calculates the cost of the model using
+            logistic regression function:
             loss = -((Y * log(A)) + ((1 - Y) * log(1 - A)))
             logistic regression cost function:
             cost = (1 / m) * sum of loss function for all m example
