@@ -42,7 +42,7 @@ class Neuron:
 
         def cost(self, Y, A):
             """
-            calculates the cost of the model using 
+            calculates the cost of the model using
             logistic regression function:
             """
             m = Y.shape[1]
