@@ -74,7 +74,8 @@ class NeuralNetwork:
         calculates the cost of the model using logistic regression
         """
         m = Y.shape[1]
-        m_loss = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
+        m_loss = np.sum((Y * np.log(A)) +
+                        ((1 - Y) * np.log(1.0000001 - A)))
         cost = (1 / m) * (-(m_loss))
         return (cost)
 
@@ -95,23 +96,27 @@ class NeuralNetwork:
         m = Y.shape[1]
 
         # the error or loss at the output layer (dz2)
-        # by taking the difference between the predicted output A2 and actual labels Y
+        # by taking the difference between the predicted output
+        # A2 and actual labels Y
         dz2 = (A2 - Y)
 
         # the gradient of the cost with respect to W2 (d__W2)
         # using the error dz2 and output of the hidden layer A1
         """
-        The derivative of the cost with respect to the weights of the output layer 
-        is the product of the derivative of the cost 
-        with respect to the activations of the output layer (dz2) 
-        and the derivative of the activations 
-        of the output layer with respect to the weights of the output layer (A1.transpose()).
+        The derivative of the cost with respect to the weights
+        of the output layer
+        is the product of the derivative of the cost
+        with respect to the activations of the output layer (dz2)
+        and the derivative of the activations
+        of the output layer with respect to the weights of the
+        output layer (A1.transpose()).
         """
         d__W2 = (1 / m) * (np.matmul(dz2, A1.transpose()))
         # similarly, by taking the average of the errors over all examples
         d__b2 = (1 / m) * (np.sum(dz2, axis=1, keepdims=True))
 
-        # the error or loss at hidden layes dz1 by taking the dot product of W2 and dz2
+        # the error or loss at hidden layes dz1 by taking the
+        # dot product of W2 and dz2
         # and element-wise multiplication of the result with A1 and 1-A1
         dz1 = (np.matmul(self.W2.transpose(), dz2)) * (A1 * (1 - A1))
 
