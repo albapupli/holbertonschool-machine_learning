@@ -7,7 +7,7 @@ import numpy as np
 
 class NeuralNetwork:
     """
-    class that represents a neural network with one hidden 
+    class that represents a neural network with one hidden
     layer performing binary classification
     """
 
@@ -28,8 +28,8 @@ class NeuralNetwork:
         self.b1 = np.zeros((nodes, 1))
         self.A1 = 0
 
-        #only one node and receives the output from the hidden layer as input
+        # only one node and receives the output from the hidden layer as input
         self.W2 = np.random.randn(1, nodes)
-        #matching the shape of the output neurons activation
+        # matching the shape of the output neurons activation
         self.b2 = 0
         self.A2 = 0
