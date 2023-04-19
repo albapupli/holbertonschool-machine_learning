@@ -68,6 +68,9 @@ class DeepNeuralNetwork:
         return (A, self.cache)
 
     def cost(self, Y, A):
+        """
+        calculates the cost of the model using logistic regression function:
+        """
         m = Y.shape[1]
         m_loss = np.sum((Y * np.log(A)) + ((1 - Y)
                         * np.log(1.0000001 - A)))
@@ -75,6 +78,9 @@ class DeepNeuralNetwork:
         return (cost)
 
     def evaluate(self, X, Y):
+        """
+        evaluates the neuron's predictions
+        """
         A, cache = self.forward_prop(X)
         cost = self.cost(Y, A)
         prediction = np.where(A >= 0.5, 1, 0)

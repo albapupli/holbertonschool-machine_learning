@@ -50,7 +50,9 @@ class DeepNeuralNetwork:
         return (self.__weights)
 
     def forward_prop(self, X):
-
+        """
+        calculates the forward propagation of the neuron
+        """
         self.__cache["A0"] = X
 
         for index in range(self.L):
@@ -65,6 +67,9 @@ class DeepNeuralNetwork:
         return (A, self.cache)
 
     def cost(self, Y, A):
+        """
+        calculates the cost of the model using logistic regression function:
+        """
         m = Y.shape[1]
         m_loss = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
         cost = (1 / m) * (-(m_loss))
