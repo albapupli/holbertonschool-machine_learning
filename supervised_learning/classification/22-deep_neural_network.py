@@ -85,7 +85,24 @@ class DeepNeuralNetwork:
         return (prediction, cost)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
-
+        """
+        calculates one pass of gradient descent on the neuron
+        derivative of loss function with respect to A:
+            dA = (-Y / A) + ((1 - Y) / (1 - A))
+        derivative of A with respect to z:
+            dz = A * (1 - A)
+        combining two above with chain rule,
+        derivative of loss function with respect to z:
+            dz = A - Y
+        using chain rule with above derivative,
+        derivative of loss function with respect to __W:
+            d__W = Xdz
+        derivative of loss function with respect to __b:
+            d__b = dz
+        one-step of gradient descent updates the attributes with the following:
+            __W = __W - (alpha * d__W)
+            __b = __b - (alpha * d__b)
+        """
         m = Y.shape[1]
         back = {}
 
@@ -115,7 +132,9 @@ class DeepNeuralNetwork:
                 self.weights["b{}".format(index)] - (alpha * db))
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
-
+        """
+        trains the neuron and updates __W, __b, and __A
+        """
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
         if iterations <= 0:
