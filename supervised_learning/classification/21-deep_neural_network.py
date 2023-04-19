@@ -114,17 +114,20 @@ class DeepNeuralNetwork:
 
             # checks if the current layer is the output layer
             if index == self.L:
-                # the derivative of the cost with respect to the 
+                # the derivative of the cost with respect to the
                 # output activations A
                 # is computed as A - Y
                 back["dz{}".format(index)] = (cache["A{}".format(index)] - Y)
             else:
-                # compute derivative w.r.t the activations of the previous layer
-                # retrieve derivative w.r.t the activations of the current layer+1
+                # compute derivative w.r.t the activations
+                # of the previous layer
+                # retrieve derivative w.r.t the activations
+                # of the current layer+1
                 dz_prev = back["dz{}".format(index + 1)]
                 # retrieve the activations of the current layer
                 A_current = cache["A{}".format(index)]
-                # compute the derivative of the cost with respect to the activations
+                # compute the derivative of the cost with
+                # respect to the activations
                 back["dz{}".format(index)] = (
                     np.matmul(W_prev.transpose(), dz_prev) *
                     (A_current * (1 - A_current)))
