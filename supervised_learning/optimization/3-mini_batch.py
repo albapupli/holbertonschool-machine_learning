@@ -1,6 +1,8 @@
-# NOTE
-# This code should be executed on Sanbox only as there might be version incompatibility 
-# with TensorFlow 2.X
+#!/usr/bin/env python3
+"""
+this function trains a loaded neural network model using mini-batch gradient descent
+"""
+
 
 import tensorflow as tf
 shuffle_data = __import__('2-shuffle_data').shuffle_data

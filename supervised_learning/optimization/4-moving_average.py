@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""
+
+"""
 def moving_average(data, beta):
     v = 0
     EMA = []

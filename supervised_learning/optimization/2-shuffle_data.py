@@ -1,4 +1,12 @@
+#!/usr/bin/env python3
+"""
+this function shuffles the data point in two matrices the same way
+"""
+
+
 import numpy as np
+
+
 def shuffle_data(X, Y):
     
     m = X.shape[0]

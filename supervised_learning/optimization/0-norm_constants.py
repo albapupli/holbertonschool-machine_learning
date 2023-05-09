@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""
+this function calculates the normalization constraints of a matrix
+"""
+
 import numpy as np
 
 def normalization_constants(X):
