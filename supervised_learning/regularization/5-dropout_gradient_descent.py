@@ -43,7 +43,7 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
 
         # store for next interation
         W_prev = weights["W{}".format(index)]
-    
+
         # modify weights and bias
         weights["W{}".format(index)] = (
             weights["W{}".format(index)] - (alpha * dW))
