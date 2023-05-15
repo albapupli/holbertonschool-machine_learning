@@ -36,15 +36,15 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
             dz *= cache["D{}".format(index)]
             dz /= keep_prob
 
-    # calculate weights and bias
-    dW = (1 / m) * (np.matmul(dz, A.transpose()))
-    db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
+        # calculate weights and bias
+        dW = (1 / m) * (np.matmul(dz, A.transpose()))
+        db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
         
-    # store for next interation
-    W_prev = weights["W{}".format(index)]
+        # store for next interation
+        W_prev = weights["W{}".format(index)]
         
-    # modify weights and bias
-    weights["W{}".format(index)] = (
-    weights["W{}".format(index)] - (alpha * dW))
-    weights["b{}".format(index)] = (
-    weights["b{}".format(index)] - (alpha * db))
+        # modify weights and bias
+        weights["W{}".format(index)] = (
+        weights["W{}".format(index)] - (alpha * dW))
+        weights["b{}".format(index)] = (
+        weights["b{}".format(index)] - (alpha * db))
