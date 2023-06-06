@@ -44,5 +44,5 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
                 convoluted[:, i, j, index] = activation(output)
                 j += 1
             i += 1
- 
+
     return convoluted
