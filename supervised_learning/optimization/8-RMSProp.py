@@ -5,7 +5,7 @@ this function calculates the weighted moving avg of dataset
 
 
 import numpy as np
-import tensorflow as tf
+#import tensorflow as tf
 
 
 def create_RMSProp_op(loss, alpha, beta2, epsilon):
