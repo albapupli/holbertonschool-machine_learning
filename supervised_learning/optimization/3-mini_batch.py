@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-this function trains a loaded neural network model using mini-batch gradient descent
+this function trains a loaded neural network model
+using mini-batch gradient descent
 """
 
 
