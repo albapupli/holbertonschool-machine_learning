@@ -1,5 +1,13 @@
+#!/usr/bin/env python3
+"""
+this function updates a var in place using Adam optimization alg
+"""
+
+
 def update_variables_Adam(alpha, beta1, beta2, epsilon, var, grad, v, s, t):
-    
+    """
+    update a var in place using Adam opt
+    """
     v_dW = (beta1 * v) + ((1 - beta1) * grad)
     s_dW = (beta2 * s) + ((1 - beta2) * (grad ** 2))
     v_dW_c = v_dW / (1 - (beta1 ** t))
