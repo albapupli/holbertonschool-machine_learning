@@ -4,7 +4,6 @@ this function calculates the weighted moving avg of dataset
 """
 
 
-import numpy as np
 import tensorflow as tf
 
 
