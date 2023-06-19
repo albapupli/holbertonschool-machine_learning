@@ -1,23 +1,11 @@
-5.1. High Bias, High Variance
-A model with high bias and high variance indicates that the model is underfitting and overfitting at the same time. This means that the model is not capturing the complexity of the data, and it is not generalizing well to new data. To address this, it is necessary to:
+1. High Bias, High Variance
+A, B, D
 
-train more to improve the underfitting
-try different architectures to find a better model that can capture the complexity of the data
-build a deeper network to increase the capacity of the model.
-On the other hand, getting more data and using regularization are effective ways to address overfitting, which is typically associated with high variance. However, they are less effective in addressing high bias, which is the primary issue with a model that has high bias and high variance.
-
-5.2. High Bias, Low Variance
-The same measures are correct for a model with high bias and low variance because increasing the amount of data, trying a different architecture, and building a deeper network can still help to reduce the high bias, even if the model has low variance.
-
-But, keep in mind that, while the focus should be on reducing bias, it's still possible that overfitting can occur due to high variance. Therefore, techniques like regularization can still be useful to control variance and improve overall performance. However, in this case, it's important to prioritize reducing bias first.
+2. High Bias, Low Variance
+A, B, D
 
 5.3. Low Bias, High Variance
-A low bias and high variance model suggests that the model is not overfitting but rather is over-generalizing. In this case:
-
-trying a different architecture can help the model learn better representations
-getting more data can help reduce the variance and improve the generalization, and
-regularization can help constrain the model and prevent overfitting.
-On the other hand, in the case of low bias and high variance, the model is already fitting the training data well but is overfitting, meaning it's not generalizing well to new, unseen data. Simply training more or building a deeper network could exacerbate the overfitting problem, leading to worse performance on new data. Therefore, trying a different architecture, getting more data, or using regularization techniques to reduce overfitting would be more effective.
+B, C, E
 
 5.4. Low Bias, Low Variance
-Welcome to a perfect world. Sit back and do nothing
+F
