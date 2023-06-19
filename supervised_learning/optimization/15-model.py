@@ -10,7 +10,7 @@ import numpy as np
 import tensorflow as tf
 
 
-def model(Data_train, Data_valid, layers, activations, 
+def model(Data_train, Data_valid, layers, activations,
           alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8, 
           decay_rate=1, batch_size=32, epochs=5, save_path='./model.ckpt'):
     """
@@ -28,13 +28,15 @@ def model(Data_train, Data_valid, layers, activations,
     for i, layer_size in enumerate(layers):
         activation = activations[i]
         if i == 0:
-            model.add(tf.keras.layers.Dense(layer_size, input_shape=input_shape, activation=activation))
+            model.add(tf.keras.layers.Dense(layer_size, input_shape=input_shape,
+                                            activation=activation))
         else:
             model.add(tf.keras.layers.Dense(layer_size, activation=activation))
 
         model.add(tf.keras.layers.BatchNormalization())
 
-    optimizer = tf.keras.optimizers.Adam(learning_rate=alpha, beta_1=beta1, beta_2=beta2, epsilon=epsilon)
+    optimizer = tf.keras.optimizers.Adam(learning_rate=alpha,
+                                         beta_1=beta1, beta_2=beta2, epsilon=epsilon)
 
     loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 
