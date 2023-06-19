@@ -4,7 +4,6 @@ this function reates a batch normalization layer for a neural network in tensorf
 """
 
 
-import numpy as np
 import tensorflow as tf
 
 
