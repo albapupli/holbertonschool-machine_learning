@@ -10,7 +10,9 @@ precision = __import__('2-precision').precision
 
 
 def f1_score(confusion):
-    # Calculate the precision and sensitivity for each class
+    """
+    Calculate the precision and sensitivity for each class
+    """
     p = precision(confusion)
     r = sensitivity(confusion)
 
