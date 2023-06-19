@@ -8,6 +8,16 @@ using Adam optimization alg
 import tensorflow as tf
 
 
+def create_RMSProp_op(loss, alpha, beta2, epsilon):
+    """
+    training operation using RMSProp opt
+    """
+    optimizer = tf.train.RMSPropOptimizer(learning_rate=alpha,
+                                          decay=beta2, epsilon=epsilon)
+    train_op = optimizer.minimize(loss)
+    return train_op
+
+
 def update_variables_Adam(alpha, beta1, beta2, epsilon, var, grad, v, s, t):
     """
     update a var in place using Adam opt
