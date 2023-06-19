@@ -1,11 +1,11 @@
 1. High Bias, High Variance
-A, B, D
+A,B,D
 
 2. High Bias, Low Variance
-A, B, D
+A,B,D
 
 5.3. Low Bias, High Variance
-B, C, E
+B,C,E
 
 5.4. Low Bias, Low Variance
-F 
+F
