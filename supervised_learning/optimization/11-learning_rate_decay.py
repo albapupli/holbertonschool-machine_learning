@@ -4,7 +4,7 @@ this function updates the learning rate using inverse time decay in numpy
 """
 
 
-import tensorflow as tf
+import numpy as np;
 
 
 def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
