@@ -49,4 +49,3 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
             weights["W{}".format(index)] - (alpha * dW))
         weights["b{}".format(index)] = (
             weights["b{}".format(index)] - (alpha * db))
-        
