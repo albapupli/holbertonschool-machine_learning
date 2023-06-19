@@ -35,20 +35,21 @@ def model(Data_train, Data_valid, layers, activations,
 
         model.add(tf.keras.layers.BatchNormalization())
 
-    optimizer = tf.keras.optimizers.Adam(learning_rate=alpha,
-                                         beta_1=beta1, beta_2=beta2, epsilon=epsilon)
+    optimizer = tf.keras.optimizers.Adam(learning_rate=alpha, beta_1=beta1,
+                                         beta_2=beta2, epsilon=epsilon)
 
     loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 
     metric = tf.keras.metrics.SparseCategoricalAccuracy()
 
     lr_scheduler = tf.keras.callbacks.LearningRateScheduler(lambda epoch: alpha /
-                                                            (1 + decay_rate * epoch))
+                                                        (1 + decay_rate * epoch))
     model_checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath=save_path,
                                                           save_best_only=True)
 
     model.compile(optimizer=optimizer, loss=loss_fn, metrics=[metric])
 
-    history = model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs, validation_data=(X_valid, y_valid), callbacks=[lr_scheduler, model_checkpoint])
+    history = model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs,
+                        validation_data=(X_valid, y_valid), callbacks=[lr_scheduler, model_checkpoint])
 
     return save_path
