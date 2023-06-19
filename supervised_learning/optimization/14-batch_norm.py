@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-this function reates a batch normalization layer for a neural network in tensorflow
+this function reates a batch normalization
+layer for a neural network in tensorflow
 """
 
 
@@ -11,7 +12,8 @@ def create_batch_norm_layer(prev, n, activation):
     """
     creating batch normalization for a nn in tf
     """
-    k_init = tf.keras.initializers.VarianceScaling(mode="fan_avg")
+    k_init = tf.keras.initializers.VarianceScaling(
+        mode="fan_avg")
     dense_layer = tf.keras.layers.Dense(units=n, kernel_initializer=k_init, use_bias=False)
     Z = dense_layer(prev)
 
