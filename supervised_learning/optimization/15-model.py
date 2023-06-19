@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 this function builds, trains, and saves a neural network model in tensorflow
-using Adam optimization, mini-batch gradient descent, learning rate decay,and batch normalization
+using Adam optimization, mini-batch gradient descent, learning rate decay,
+and batch normalization
 """
 
 
@@ -12,6 +13,9 @@ import tensorflow as tf
 def model(Data_train, Data_valid, layers, activations, 
           alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8, 
           decay_rate=1, batch_size=32, epochs=5, save_path='./model.ckpt'):
+    """
+    building, training and saving nn model in tf via != optimizations
+    """
 
     X_train, y_train = Data_train
     X_valid, y_valid = Data_valid
@@ -36,8 +40,10 @@ def model(Data_train, Data_valid, layers, activations,
 
     metric = tf.keras.metrics.SparseCategoricalAccuracy()
 
-    lr_scheduler = tf.keras.callbacks.LearningRateScheduler(lambda epoch: alpha / (1 + decay_rate * epoch))
-    model_checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath=save_path, save_best_only=True)
+    lr_scheduler = tf.keras.callbacks.LearningRateScheduler(lambda epoch: alpha /
+                                                            (1 + decay_rate * epoch))
+    model_checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath=save_path,
+                                                          save_best_only=True)
 
     model.compile(optimizer=optimizer, loss=loss_fn, metrics=[metric])
 
