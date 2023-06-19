@@ -5,6 +5,7 @@ using Adam optimization, mini-batch gradient descent, learning rate decay,and ba
 """
 
 
+import numpy as np
 import tensorflow as tf
 
 
