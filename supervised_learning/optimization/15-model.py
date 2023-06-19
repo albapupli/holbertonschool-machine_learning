@@ -30,7 +30,8 @@ def model(Data_train, Data_valid, layers, activations,
         activation = activations[i]
         if i == 0:
             model.add(tf.keras.layers.Dense(layer_size,
-                                            input_shape=input_shape, activation=activation))
+                                            input_shape=input_shape,
+                                            activation=activation))
         else:
             model.add(tf.keras.layers.Dense(layer_size, activation=activation))
 
@@ -43,8 +44,8 @@ def model(Data_train, Data_valid, layers, activations,
 
     metric = tf.keras.metrics.SparseCategoricalAccuracy()
 
-    lr_scheduler = tf.keras.callbacks.LearningRateScheduler(lambda epoch:
-                                                            alpha / (1 + decay_rate * epoch))
+    lr_scheduler = tf.keras.callbacks.LearningRateScheduler(
+        lambda epoch: alpha / (1 + decay_rate * epoch))
     model_checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath=save_path,
                                                           save_best_only=True)
 
