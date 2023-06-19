@@ -14,7 +14,8 @@ def create_batch_norm_layer(prev, n, activation):
     """
     k_init = tf.keras.initializers.VarianceScaling(
         mode="fan_avg")
-    dense_layer = tf.keras.layers.Dense(units=n, kernel_initializer=k_init, use_bias=False)
+    dense_layer = tf.keras.layers.Dense(
+        units=n, kernel_initializer=k_init, use_bias=False)
     Z = dense_layer(prev)
 
     beta = tf.Variable(initial_value=tf.zeros((1, n)), trainable=True)
