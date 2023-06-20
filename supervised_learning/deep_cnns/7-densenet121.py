@@ -8,6 +8,7 @@ import tensorflow.keras as K
 dense_block = __import__('5-dense_block').dense_block
 transition_layer = __import__('6-transition_layer').transition_layer
 
+
 def densenet121(growth_rate=32, compression=1.0):
     """
     Builds a DenseNet-121 network using Keras model
@@ -47,7 +48,7 @@ def densenet121(growth_rate=32, compression=1.0):
 
     DB2, nb_filters = dense_block(MP1, 64, growth_rate, 6)
     TL3, nb_filters = transition_layer(DB2, nb_filters, compression)
-    
+
     DB4, nb_filters = dense_block(TL3, nb_filters, growth_rate, 12)
     TL5, nb_filters = transition_layer(DB4, nb_filters, compression)
 
