@@ -6,6 +6,7 @@ this function builds a modified version of the LeNet-5 arch using tf
 
 import tensorflow as tf
 
+
 def lenet5(x, y):
     """
     Convolutional layer 1
