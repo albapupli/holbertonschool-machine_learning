@@ -10,12 +10,14 @@ def lenet5(x, y):
     """
     Convolutional layer 1
     """
-    conv1 = tf.keras.layers.Conv2D(filters=6, kernel_size=5, padding='same', activation='relu', kernel_initializer='he_normal')(x)
+    conv1 = tf.keras.layers.Conv2D(filters=6, kernel_size=5, padding='same',
+                                   activation='relu', kernel_initializer='he_normal')(x)
     # Max pooling layer 1
     pool1 = tf.keras.layers.MaxPooling2D(pool_size=2, strides=2)(conv1)
 
     # Convolutional layer 2
-    conv2 = tf.keras.layers.Conv2D(filters=16, kernel_size=5, padding='valid', activation='relu', kernel_initializer='he_normal')(pool1)
+    conv2 = tf.keras.layers.Conv2D(filters=16, kernel_size=5, padding='valid',
+                                   activation='relu', kernel_initializer='he_normal')(pool1)
     # Max pooling layer 2
     pool2 = tf.keras.layers.MaxPooling2D(pool_size=2, strides=2)(conv2)
 
@@ -23,10 +25,12 @@ def lenet5(x, y):
     flatten = tf.keras.layers.Flatten()(pool2)
 
     # Fully connected layer 1
-    fc1 = tf.keras.layers.Dense(120, activation='relu', kernel_initializer='he_normal')(flatten)
+    fc1 = tf.keras.layers.Dense(120, activation='relu',
+                                kernel_initializer='he_normal')(flatten)
 
     # Fully connected layer 2
-    fc2 = tf.keras.layers.Dense(84, activation='relu', kernel_initializer='he_normal')(fc1)
+    fc2 = tf.keras.layers.Dense(84, activation='relu',
+                                kernel_initializer='he_normal')(fc1)
 
     # Output layer
     output = tf.keras.layers.Dense(10, activation='softmax')(fc2)
