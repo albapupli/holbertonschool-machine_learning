@@ -31,7 +31,35 @@ class Yolo:
         self.anchors = anchors
 
     def process_outputs(self, outputs, image_size):
-
+        """Process Darknet model outputs
+        Args:
+            outputs: list of numpy.ndarrays containing the predictions from
+                the Darknet model for a single image:
+                Each output will have the shape (grid_height, grid_width,
+                    anchor_boxes, 4 + 1 + classes)
+                    grid_height & grid_width => the height and width of the
+                        grid used for the output
+                    anchor_boxes => the number of anchor boxes used
+                    4 => (t_x, t_y, t_w, t_h)
+                    1 => box_confidence
+                    classes => class probabilities for all classes
+            image_size: numpy.ndarray containing the image’s original size
+                [image_height, image_width]
+        Returns:
+            A tuple of (boxes, box_confidences, box_class_probs):
+                boxes: a list of numpy.ndarrays of shape (grid_height,
+                    grid_width, anchor_boxes, 4) containing the processed
+                    boundary boxes for each output, respectively:
+                    4 => (x1, y1, x2, y2)
+                        (x1, y1, x2, y2) should represent the boundary box
+                        relative to original image
+                box_confidences: list of numpy.ndarrays of shape (grid_height,
+                    grid_width, anchor_boxes, 1) containing the box confidences
+                    for each output, respectively
+                box_class_probs: list of numpy.ndarrays of shape (grid_height,
+                    grid_width, anchor_boxes, classes) containing the box’s
+                    class probabilities for each output, respectively
+        """
         boxes = []
         box_confidences = []
         box_class_probs = []
