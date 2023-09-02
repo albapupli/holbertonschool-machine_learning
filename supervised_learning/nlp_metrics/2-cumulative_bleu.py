@@ -92,7 +92,7 @@ def precision(references, sentence, n):
     return precision
 
 """
-alculates the cumulative n-gram BLEU score by computing 
+Calculates the cumulative n-gram BLEU score by computing 
 the mean precision of n-grams across different sizes 
 and then combining this mean precision with a brevity penalty (BLEU). 
 This score provides a more comprehensive evaluation of the translation quality 
