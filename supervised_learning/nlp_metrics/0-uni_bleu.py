@@ -3,18 +3,6 @@
 this function calculates the unigram BLEU score for a sentence
 """
 
-"""
-import nltk
-from nltk.translate.bleu_score import sentence_bleu
-
-
-def uni_bleu(references, sentence):
-    """Calculate BLEU score with unigram (1-gram) precision
-    """
-    bleu_score = sentence_bleu(references, sentence, weights=(1, 0, 0, 0))
-    return bleu_score
-"""
-
 
 import numpy as np
 
