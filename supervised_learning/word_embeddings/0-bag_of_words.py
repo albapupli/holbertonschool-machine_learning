@@ -7,6 +7,7 @@ bag of words function for word embeddings
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 
+
 def bag_of_words(sentences, vocab=None):
     """
     bag of words function
