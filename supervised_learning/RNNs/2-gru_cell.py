@@ -20,11 +20,13 @@ class GRUCell:
         self.br = np.zeros((1, h))
 
         """
-        The first dimension, h + i, determines the total number of input units to the update gate.
-        This includes the hidden state dimension (h) and the input dimension (i).
+        The first dimension, h + i, determines the total number of input
+        units to the update gate. This includes the hidden state dimension
+        (h) and the input dimension (i).
 
-        The input dimension i represents the size of the input at each time step,
-        while the hidden state dimension h represents the size of the previous hidden state.
+        The input dimension i represents the size of the input at each time
+        step, while the hidden state dimension h represents the size of the
+        previous hidden state.
         """
         self.Wz = np.random.normal(size=(h + i, h))
         self.Wr = np.random.normal(size=(h + i, h))
@@ -35,11 +37,9 @@ class GRUCell:
         self.Wh = np.random.normal(size=(h + i, h))
         self.Wy = np.random.normal(size=(h, o))
 
-
     def softmax(self, x):
         """
         Performs the softmax function
-
         """
         e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
         softmax = e_x / e_x.sum(axis=1, keepdims=True)
@@ -59,7 +59,8 @@ class GRUCell:
         """
 
         """
-        perform the computation of the update gate (z_gate) and reset gate (r_gate) for the GRU cell.
+        perform the computation of the update gate
+        (z_gate) and reset gate (r_gate) for the GRU cell.
         """
         # concatenating the previous hidden state and hidden input
         concatenation1 = np.concatenate((h_prev, x_t), axis=1)
@@ -73,7 +74,8 @@ class GRUCell:
         """
         concatenation2 = np.concatenate((r_gate * h_prev, x_t), axis=1)
         h_next = np.tanh(np.matmul(concatenation2, self.Wh) + self.bh)
-        # element-wise multiplication between the intermediate hidden state h_next
+        # element-wise multiplication between the intermediate
+        # hidden state h_next
         # and the update gate z_gate; controls information (0, 1)
         h_next *= z_gate
         #  the complement of the update gate, how much info to discard
@@ -82,4 +84,3 @@ class GRUCell:
         y = self.softmax(np.matmul(h_next, self.Wy) + self.by)
 
         return h_next, y
-    
