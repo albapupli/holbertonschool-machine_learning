@@ -82,7 +82,7 @@ def ngram_bleu(references, sentence, n):
     for ref in ngram_references:
         for gram in ref:
             # For each n-gram in the reference, it updates the count in the
-            # references_dictionary 
+            # references_dictionary
             # if the n-gram is absent or its count in the reference is higher
             # than the stored count
             if references_dictionary.get(gram) is None or \
@@ -103,10 +103,11 @@ def ngram_bleu(references, sentence, n):
     print(matchings)
 
     # ensuring that each word's value is capped at the minimum of its count in
-    # the reference n-grams making sure that the matching words in the generated
-    # n-gram sentence are not counted more than the number of times they appear in the
-    # reference n-grams. This step ensures that the calculation of precision and
-    # the BLEU score are not skewed by an excessive number of repeated words.
+    # the reference n-grams making sure that the matching words in
+    # the generated n-gram sentence are not counted more than the
+    # number of times they appear in the reference n-grams. This
+    # step ensures that the calculation of precision and the BLEU score are not
+    # skewed by an excessive number of repeated words.
     for gram in matchings.keys():
         if references_dictionary.get(gram) is not None:
             matchings[gram] = min(references_dictionary[gram], matchings[gram])
