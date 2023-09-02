@@ -102,8 +102,8 @@ def ngram_bleu(references, sentence, n):
                 matchings[gram] = sentence_dictionary[gram]
     print(matchings)
 
-    # ensuring that each word's value is capped at the minimum of its count in the
-    # reference n-grams
+    # ensuring that each word's value is capped at the minimum of its count
+    # in the reference n-grams
     # making sure that the matching words in the generated n-gram sentence
     # are not counted more than the number of times they appear in the
     # reference n-grams.
