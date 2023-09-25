@@ -5,9 +5,8 @@ a function that calculates the symmetric P affinities of a data set
 
 
 import numpy as np
-from scipy.optimize import minimize
-from P_init import P_init
-from entropy import HP
+P_init = __import__('2-P_init').P_init
+HP = __import__('3-entropy').HP
 
 
 def binary_search_beta(Di, target_entropy, tol=1e-5):
