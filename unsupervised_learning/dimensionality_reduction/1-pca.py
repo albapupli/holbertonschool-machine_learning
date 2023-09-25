@@ -27,4 +27,7 @@ def pca(X, ndim):
     # Compute the transformed data
     T = np.dot(X, top_eigenvectors)
 
+    # Round the values to a reasonable precision
+    T = np.round(T, decimals=4)
+
     return T
