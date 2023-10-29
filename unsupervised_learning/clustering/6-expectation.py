@@ -6,6 +6,7 @@
 import numpy as np
 pdf = __import__('5-pdf').pdf
 
+
 def expectation(X, pi, m, S):
     """
     Function that calculates the expectation step in the EM algorithm for a GMM
