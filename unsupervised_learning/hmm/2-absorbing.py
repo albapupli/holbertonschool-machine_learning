@@ -29,7 +29,6 @@ def absorbing(P):
     # questions/45164505/best-iterative-way-to-calculate-the-fundamental-matrix-
     # of-an-absorbing-markov-ch
 
-
     """
     For each diagonal element (where i == j)
     check the transition probabilities of the next state and the
