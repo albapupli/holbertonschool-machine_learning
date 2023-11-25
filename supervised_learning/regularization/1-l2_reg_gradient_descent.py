@@ -3,8 +3,8 @@
 Updates the weights and biases of a neural network using gradient descent
 with L2 regularization
 """
-import numpy as np
-
+# import numpy as np
+import tensorflow.compat.v1 as tf
 
 def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     """
