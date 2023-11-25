@@ -1,26 +1,21 @@
 #!/usr/bin/env python3
-""" data collection from APIs """
+"""script that prints the location of a specific user"""
+import requests
 import sys
-# import requests
-from requests import get
 import time
 
 
 if __name__ == '__main__':
-    """ Script that prints the location of a specific user """
+    """script that prints the location of a specific user"""
+    r = requests.get(sys.argv[1])
 
-    # https://api.github.com/users/holbertonschool
-    url = sys.argv[1]
-    # user is passed as first argument of the script with the full API URL
-    request = get(url, params={'Accept': "application/vnd.github.v3+json"})
-
-    if request.status_code == 200:
-        print(request.json()["location"])
-
-    if request.status_code == 404:
+    if r.status_code == 404:
         print("Not found")
 
-    if request.status_code == 403:
-        limit = request.headers["X-Ratelimit-Reset"]
-        x = int((int(limit) - int(time.time())) / 60)
-        print("Reset in " + str(x) + " min")
+    elif r.status_code == 200:
+        print(r.json()["location"])
+
+    elif r.status_code == 403:
+        X = r.headers["X-Ratelimit-Reset"]
+        X = (int(X) - int(time.time())) / 60
+        print("Reset in {} min".format(int(X)))
