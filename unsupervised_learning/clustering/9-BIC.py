@@ -1,55 +1,40 @@
 #!/usr/bin/env python3
-""" Bayesian Information Criterion """
-
+"""Clusterin tasks"""
 import numpy as np
 expectation_maximization = __import__('8-EM').expectation_maximization
 
+
 def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
-    """
-    BIC function
-    """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None, None, None
-    if type(kmin) != int or kmin <= 0 or kmin >= X.shape[0]:
-        return None, None, None, None
-    if type(kmax) != int or kmax <= 0 or kmax >= X.shape[0]:
-        return None, None, None, None
-    if kmin >= kmax:
-        return None, None, None, None
-    if type(iterations) != int or iterations <= 0:
-        return None, None, None, None
-    if type(tol) != float or tol <= 0:
-        return None, None, None, None
-    if type(verbose) != bool:
-        return None, None, None, None
-
-    k_best = []
-    best_res = []
-    logl_val = []
-    bic_val = []
+    """BIC function"""
+    if type(X) is not np.ndarray or type(kmin) is not int:
+        return (None, None, None, None)
+    if len(X.shape) != 2:
+        return (None, None, None, None)
+    if type(iterations) is not int or iterations <= 0:
+        return (None, None, None, None)
+    if type(kmax) is not int or kmax <= 0 or kmax >= X.shape[0]:
+        return (None, None, None, None)
+    if kmin <= 0 or kmin >= X.shape[0] or kmin >= kmax:
+        return (None, None, None, None)
+    if type(tol) is not float or tol <= 0:
+        return (None, None, None, None)
+    if type(verbose) is not bool:
+        return (None, None, None, None)
     n, d = X.shape
+    ki = []
+    li = []
+    bi = []
+    tup = []
     for k in range(kmin, kmax + 1):
-        pi, m, S,  _, log_l = expectation_maximization(X, k, iterations, tol,
-                                                       verbose)
-        k_best.append(k)
-        best_res.append((pi, m, S))
-        logl_val.append(log_l)
-
-        # Formula pf paramaters: https://bit.ly/33Cw8lH
-        # code based on gaussian mixture source code n_parameters source code
-        cov_params = k * d * (d + 1) / 2.
-        mean_params = k * d
-        p = int(cov_params + mean_params + k - 1)
-
-        # Formula for this task BIC = p * ln(n) - 2 * l
-        bic = p * np.log(n) - 2 * log_l
-        bic_val.append(bic)
-
-    bic_val = np.array(bic_val)
-    logl_val = np.array(logl_val)
-    best_val = np.argmin(bic_val)
-
-    k_best = k_best[best_val]
-    best_res = best_res[best_val]
-
-    return k_best, best_res, logl_val, bic_val
+        pi, m, S, g, ll = expectation_maximization(X, k, iterations,
+                                                   tol, verbose)
+        p = (d * k) + (k * d * (d + 1) / 2) + k - 1
+        li.append(ll)
+        ki.append(k)
+        tup.append((pi, m, S))
+        BIC = p * np.log(n) - 2 * ll
+        bi.append(BIC)
+    ll = np.array(li)
+    b = np.array(bi)
+    top = np.argmin(b)
+    return (ki[top], tup[top], ll, b)
