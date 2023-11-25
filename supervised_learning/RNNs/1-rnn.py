@@ -1,48 +1,36 @@
 #!/usr/bin/env python3
 """
-Defines function that performs forward propagation for simple RNN
+Creates the class RNNCell
 """
-
-
 import numpy as np
 
 
 def rnn(rnn_cell, X, h_0):
     """
-    Performs forward propagation for simple RNN
+    Performs forward propagation for a simple RNN
+    :param X: the data to be used, given as a numpy.ndarray of
+    shape (t, m, i)
+        t is the maximum number of time steps
+        m is the batch size
+        i is the dimensionality of the data
+    :param h_0: the initial hidden state, given as a numpy.ndarray of
+    shape (m, h)
+        h is the dimensionality of the hidden state
+    :return: H, Y
+        H is a numpy.ndarray containing all of the hidden states
+        Y is a numpy.ndarray containing all of the outputs
     """
     t, m, i = X.shape
-    m, h = h_0.shape
-
-    """
-    initializes a matrix H with zeros
-    t + 1: time steps plus a row for the initial hidden state.
-    m: columns, i.e., number of samples,
-    h: depth, i.e., the hidden state dimension.
-    """
+    h = h_0.shape[1]
+    o = rnn_cell.by.shape[1]
     H = np.zeros((t + 1, m, h))
+    Y = np.zeros((t, m, o))
     H[0] = h_0
+    for i in range(t):
+        x_t = X[i]
+        h_prev = H[i]
+        h_next, y_next = rnn_cell.forward(h_prev=h_prev, x_t=x_t)
+        H[i + 1] = h_next
+        Y[i] = y_next
 
-    """
-    forward propagation for each time step of the simple RNN
-    updating the hidden states and collecting the outputs
-    """
-    for step in range(t):
-        h_next, y = rnn_cell.forward(H[step], X[step])
-        H[step + 1] = h_next
-        if step == 0:
-            Y = y
-        else:
-            Y = np.concatenate((Y, y))
-
-    """
-    the output matrix is organized based on the dimensions of time steps and samples
-    allowing for easier interpretation and further processing of the RNN outputs.
-
-    determines the size of the last dimension of the matrix Y
-    representing the shape of the output at each time step.
-    """
-    output_shape = Y.shape[-1]
-    Y = Y.reshape(t, m, output_shape)
-
-    return (H, Y)
+    return H, Y
