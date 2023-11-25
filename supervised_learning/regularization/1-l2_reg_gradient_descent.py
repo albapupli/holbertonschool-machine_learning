@@ -6,6 +6,7 @@ with L2 regularization
 
 import tensorflow.compat.v1 as tf
 
+
 def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     """
     a function that updates w and b of a NN using gradient descent with L2
