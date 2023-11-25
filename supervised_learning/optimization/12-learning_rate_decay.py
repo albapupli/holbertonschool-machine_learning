@@ -2,6 +2,7 @@
 """
 Updates the learning rate using inverse time decay with tensorflow
 """
+
 import tensorflow.compat.v1 as tf
 
 
