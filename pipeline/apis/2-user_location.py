@@ -1,20 +1,39 @@
 #!/usr/bin/env python3
-"""script that prints the location of a specific user"""
-import sys
-import requests as rq
-import time
+"""
+Prints the location of a specific Github user
+"""
 
+
+import sys
+import requests
+from datetime import datetime, timedelta
+
+def get_user_location(api_url):
+    """Function to get the location of userf"""
+    response = requests.get(api_url)
+
+    if response.status_code == 404:
+        print("Not found")
+    elif response.status_code == 403:
+        reset_time = int(response.headers['X-Ratelimit-Reset'])
+        current_time = int(datetime.now().timestamp())
+        wait_time = max(0, reset_time - current_time)
+        wait_minutes = wait_time // 60
+        print(f"Reset in {wait_minutes} min")
+    elif response.status_code == 200:
+        user_data = response.json()
+        location = user_data.get('location')
+        if location:
+            print(location)
+        else:
+            print("Location not available")
+    else:
+        print("Unexpected error")
 
 if __name__ == '__main__':
-    url = sys.argv[1]
-    payload = {'Accept': "application/vnd.github.v3+json"}
-    r = rq.get(url, params=payload)
-    if r.status_code == 403:
-        limit = r.headers["X-Ratelimit-Reset"]
-        x = (int(limit) - int(time.time())) / 60
-        print("Reset in {} min".format(int(x)))
-    if r.status_code == 200:
-        location = r.json()["location"]
-        print(location)
-    if r.status_code == 404:
-        print("Not found")
+    if len(sys.argv) != 2:
+        print("Usage: ./2-user_location.py <API_URL>")
+        sys.exit(1)
+
+    api_url = sys.argv[1]
+    get_user_location(api_url)
