@@ -161,4 +161,3 @@ class Yolo:
         box_scores = classes_scores[mask]
 
         return (filtered_boxes, box_classes, box_scores)
-    
