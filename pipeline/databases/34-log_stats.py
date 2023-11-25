@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
-"""provides some stats about Nginx logs stored in MongoDB"""
+""" script that provides some stats about Nginx logs stored in MongoDB """
+
 from pymongo import MongoClient
 
 
 if __name__ == "__main__":
-    """provides some stats about Nginx logs stored in MongoDB"""
+    collection_logs = MongoClient('mongodb://127.0.0.1:27017').logs.nginx
 
-    client = MongoClient('mongodb://127.0.0.1:27017')
-    logs = client.logs.nginx
-    count_documents = logs.count_documents({})
-    print('{} logs'.format(count_documents))
-    print('Methods:')
-    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    for m in methods:
-        num_met = logs.count_documents({"method": m})
-        print('\tmethod {}: {}'.format(m, num_met))
+    print("{} logs".format(collection_logs.count_documents({})))
+    print("Methods:")
 
-    filter_path = {"method": "GET", "path": "/status"}
-    num = logs.count_documents(filter_path)
-    print("{} status check".format(num))
+    protocol_methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+
+    for method in protocol_methods:
+        num_method = collection_logs.count_documents({"method": method})
+        print("\tmethod {}: {}".format(method, num_method))
+
+    num_path = collection_logs.count_documents(
+        {"method": "GET", "path": "/status"}
+    )
+
+    print("{} status check".format(num_path))
