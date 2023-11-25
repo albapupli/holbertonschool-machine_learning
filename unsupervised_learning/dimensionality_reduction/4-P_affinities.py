@@ -1,54 +1,58 @@
 #!/usr/bin/env python3
 """
-a function that calculates the symmetric P affinities of a data set
+Calculates the symmetric P affinities
 """
-
-
 import numpy as np
 P_init = __import__('2-P_init').P_init
 HP = __import__('3-entropy').HP
 
 
-def binary_search_beta(Di, target_entropy, tol=1e-5):
-    """
-    do a binary search beta
-    """
-    low = 1e-10
-    high = None
-    beta = 1.0
-
-    # Perform binary search on beta
-    for _ in range(200):
-        H, Pi = HP(Di, beta)
-        H_diff = H - target_entropy
-
-        if abs(H_diff) < tol:
-            return beta, Pi
-
-        if H_diff > 0:
-            high = beta if high is None else min(beta, high)
-            beta = (beta + low) / 2.0
-        else:
-            low = beta if low is None else max(beta, low)
-            if high is None:
-                beta *= 2.0
-            else:
-                beta = (beta + high) / 2.0
-
-    # If we didn't converge, return the last calculated Pi
-    return beta, Pi
-
 def P_affinities(X, tol=1e-5, perplexity=30.0):
+    """
+    Calculates the symmetric P affinities of a data set
+    :param X: numpy.ndarray of shape (n, d) containing the dataset to be
+    transformed by t-SNE
+        n is the number of data points
+        d is the number of dimensions in each point
+    :param tol: the maximum tolerance allowed (inclusive) for the difference
+    in Shannon entropy from perplexity for all Gaussian distributions
+    :param perplexity: perplexity that all Gaussian distributions should have
+    :return: P, a numpy.ndarray of shape (n, n) containing the symmetric P
+    affinities
+    """
     n, d = X.shape
-    P = np.zeros((n, n))
+    D, P, betas, H = P_init(X, perplexity)
+
+    if n == 0:
+        return P
 
     for i in range(n):
-        Di, _, betas, _ = P_init(X, perplexity)
-        target_entropy = np.log2(perplexity)
-        beta, Pi = binary_search_beta(Di[i], target_entropy, tol=tol)
-        P[i, :] = Pi
+        copy = D[i].copy()
+        copy = np.delete(copy, i, axis=0)
+        Hi, Pi = HP(copy, betas[i])
+        Hdiff = Hi - H
 
-    # Make P symmetric
-    P = (P + P.T) / (2 * n)
+        low = None
+        high = None
 
+        while np.abs(Hdiff) > tol:
+            if Hdiff > 0:
+                low = betas[i, 0]
+                if high is None:
+                    betas[i] = betas[i] * 2
+                else:
+                    betas[i] = (betas[i] + high) / 2
+
+            else:
+                high = betas[i, 0]
+                if low is None:
+                    betas[i] = betas[i] / 2
+                else:
+                    betas[i] = (betas[i] + low) / 2
+
+            Hi, Pi = HP(copy, betas[i])
+            Hdiff = Hi - H
+        Pi = np.insert(Pi, i, 0)
+        P[i] = Pi
+    P = (P.T + P) / (2 * n)
     return P
