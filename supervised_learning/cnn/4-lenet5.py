@@ -1,51 +1,63 @@
 #!/usr/bin/env python3
 """
-this function builds a modified version of the LeNet-5 arch using tf
+Builds a modified version of the LeNet-5 architecture using tensorflow
 """
-
-
 import tensorflow as tf
 
 
 def lenet5(x, y):
     """
-    Convolutional layer 1
+    a function that builds a modified LeNet-5 using tensorflow
+    :param x: tf.placeholder of shape (m, 28, 28, 1) containing the input
+    images for the network
+        m is the number of images
+    :param y: tf.placeholder of shape (m, 10) containing the one-hot labels
+    for the network
+    :return:
+        a tensor for the softmax activated output
+        a training operation that utilizes Adam optimization (with default
+        hyperparameters)
+        a tensor for the loss of the network
+        a tensor for the accuracy of the network
     """
-    conv1 = tf.keras.layers.Conv2D(filters=6, kernel_size=5, padding='same',
-                                   activation='relu',
-                                   kernel_initializer='he_normal')(x)
-    # Max pooling layer 1
-    pool1 = tf.keras.layers.MaxPooling2D(pool_size=2, strides=2)(conv1)
+    init = tf.contrib.layers.variance_scaling_initializer()
+    activation = tf.nn.relu
 
-    # Convolutional layer 2
-    conv2 = tf.keras.layers.Conv2D(filters=16, kernel_size=5, padding='valid',
-                                   activation='relu',
-                                   kernel_initializer='he_normal')(pool1)
-    # Max pooling layer 2
-    pool2 = tf.keras.layers.MaxPooling2D(pool_size=2, strides=2)(conv2)
+    # 1st convolutional layer
+    conv1 = tf.layers.Conv2D(filters=6, kernel_size=(5, 5), padding="same",
+                             activation=activation, kernel_initializer=init)(x)
+    pool1 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv1)
 
-    # Flatten the output from the previous layer
-    flatten = tf.keras.layers.Flatten()(pool2)
+    # 2nd convolutional layer
+    conv2 = tf.layers.Conv2D(filters=16, kernel_size=(5, 5), padding="valid",
+                             activation=activation, kernel_initializer=init)(
+        pool1)
+    pool2 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv2)
 
-    # Fully connected layer 1
-    fc1 = tf.keras.layers.Dense(120, activation='relu',
-                                kernel_initializer='he_normal')(flatten)
+    # Flatten
+    flatten = tf.layers.Flatten()(pool2)
 
-    # Fully connected layer 2
-    fc2 = tf.keras.layers.Dense(84, activation='relu',
-                                kernel_initializer='he_normal')(fc1)
+    # Fully connected (FC) 1
+    fc1 = tf.layers.Dense(units=120, activation=activation,
+                          kernel_initializer=init)(flatten)
+    # FC 2
+    fc2 = tf.layers.Dense(units=84, activation=activation,
+                          kernel_initializer=init)(fc1)
+    # FC 3
+    fc3 = tf.layers.Dense(units=10, activation=None,
+                          kernel_initializer=init)(fc2)
 
-    # Output layer
-    output = tf.keras.layers.Dense(10, activation='softmax')(fc2)
+    # Prediction
+    y_pred = tf.nn.softmax(fc3)
 
-    # Define the loss function
-    loss = tf.reduce_mean(tf.keras.losses.categorical_crossentropy(y, output))
+    # Loss
+    loss = tf.losses.softmax_cross_entropy(y, fc3)
 
-    # Define the accuracy metric
-    accuracy = tf.reduce_mean(tf.keras.metrics.categorical_accuracy(y, output))
+    # Accuracy
+    accuracy = tf.equal(tf.argmax(y, 1), tf.argmax(fc3, 1))
+    mean = tf.reduce_mean(tf.cast(accuracy, tf.float32))
 
-    # Define the optimizer and training operation
-    optimizer = tf.keras.optimizers.Adam()
-    train_op = optimizer.minimize(loss)
+    # Train
+    train = tf.train.AdamOptimizer().minimize(loss)
 
-    return output, train_op, loss, accuracy
+    return y_pred, train, loss, mean
