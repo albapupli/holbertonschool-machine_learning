@@ -2,7 +2,7 @@
 """
 Updates the learning rate using inverse time decay with tensorflow
 """
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
