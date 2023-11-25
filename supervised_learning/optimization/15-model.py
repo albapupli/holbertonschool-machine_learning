@@ -7,7 +7,7 @@ and batch normalization
 
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 def model(Data_train, Data_valid, layers, activations,
