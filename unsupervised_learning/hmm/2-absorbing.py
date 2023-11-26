@@ -24,4 +24,3 @@ def absorbing(P):
         return True
     except Exception:
         return False
-    
