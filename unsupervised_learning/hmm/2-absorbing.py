@@ -1,39 +1,27 @@
 #!/usr/bin/env python3
-"""
-Determines if a markov chain is absorbing
-"""
+"""Function that determines if a markov chain is absorbing"""
 import numpy as np
 
 
 def absorbing(P):
-    """
-    Determines if a markov chain is absorbing
-    :param P: square 2D numpy.ndarray of shape (n, n) representing the
-    transition matrix
-    :return: True if it is absorbing, or False on failure
-    """
-    if type(P) is not np.ndarray:
+    """Function that determines if a markov chain is absorbing"""
+    if type(P) is not np.ndarray or len(P.shape) != 2:
         return False
-    if len(P.shape) != 2:
+    if P.shape[0] != P.shape[1]:
         return False
-    n, n_t = P.shape
-    if n != n_t:
+    if np.min(P ** 2) < 0 or np.min(P ** 3) < 0:
         return False
-    sum_test = np.sum(P, axis=1)
-    for elem in sum_test:
-        if not np.isclose(elem, 1):
-            return False
-
-    diagonal = np.diag(P)
-    if (diagonal == 1).all():
+    ab_state = np.where(np.diag(P) == 1)
+    if len(ab_state[0]) == P.shape[0]:
         return True
-
-    absorb = (diagonal == 1)
-    for row in range(len(diagonal)):
-        for col in range(len(diagonal)):
-            if P[row, col] > 0 and absorb[col]:
-                absorb[row] = 1
-    if (absorb == 1).all():
+    if len(ab_state[0]) == 0:
+        return False
+    B = np.copy(P)
+    B = np.delete(np.delete(B, ab_state[0], 0), ab_state[0], 1)
+    In = np.identity(B.shape[0])
+    try:
+        result = np.linalg.inv(In - B)
         return True
-
-    return False
+    except Exception:
+        return False
+    
