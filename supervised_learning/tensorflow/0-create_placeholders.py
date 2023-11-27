@@ -2,6 +2,8 @@
 """
 Defines a function to return two placeholders for the neural network
 """
+
+
 import tensorflow as tf
 
 
