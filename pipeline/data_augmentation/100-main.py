@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+"""
+Write a function def pca_color(image, alphas): that performs PCA color augmentation as described in the AlexNet paper:
+
+image is a 3D tf.Tensor containing the image to change
+alphas a tuple of length 3 containing the amount that each channel should change
+Returns the augmented image
+"""
+
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import matplotlib.pyplot as plt

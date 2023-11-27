@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+
+"""
+By using the (unofficial) SpaceX API, write a script that displays the number of launches per rocket.
+
+Use this https://api.spacexdata.com/v3/launches to make request
+All launches should be taking in consideration
+Each line should contain the rocket name and the number of launches separated by : (format below in the example)
+Order the result by the number launches (descending)
+If multiple rockets have the same amount of launches, order them by alphabetic order (A to Z)
+Your code should not be executed when the file is imported (you should use if __name__ == '__main__':)
+"""
+
 """
 By using the (unofficial) SpaceX API, write a script that displays the number
 of launches per rocket.

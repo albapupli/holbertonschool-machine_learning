@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+"""
+Write a function def change_hue(image, delta): that changes the hue of an image:
+
+image is a 3D tf.Tensor containing the image to change
+delta is the amount the hue should change
+Returns the altered image
+"""
+
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import matplotlib.pyplot as plt

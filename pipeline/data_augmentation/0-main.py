@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+Write a function def flip_image(image): that flips an image horizontally:
+
+image is a 3D tf.Tensor containing the image to flip
+Returns the flipped image
+"""
+
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import matplotlib.pyplot as plt
